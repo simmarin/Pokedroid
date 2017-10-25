@@ -19,6 +19,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
     }
 }
 
@@ -34,7 +36,7 @@ ext {
     supportLibraryVersion = '26.1.0'
     junitVersion = '4.12'
     retrofitVersion = '2.3.0'
-    glideVersion = '4.1.1'
+    glideVersion = '4.2.0'
     butterknifeVersion = '8.8.1'
     daggerVersion = '2.11'
     rxJavaVersion = "2.1.5"
