@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.mvp.demo.pokedroid.R;
 import com.mvp.demo.pokedroid.di.App;
@@ -46,26 +45,29 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        if (savedInstanceState == null) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(presenter != null)
             presenter.fetchData(presenter.getOffset());
-            Log.d("POKEDROID", "Valor del offset " + presenter.getOffset());
-        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("offset", presenter.getOffset());
-        Log.d("POKEDROID", "Valor del offset " + presenter.getOffset());
+
+        if (presenter != null)
+            outState.putInt("offset", presenter.getOffset());
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (presenter != null) {
+
+        if (presenter != null)
             presenter.setOffset(savedInstanceState.getInt("offset"));
-            Log.d("POKEDROID", "Valor del offset " + presenter.getOffset());
-        }
     }
 }
