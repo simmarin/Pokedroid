@@ -45,14 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if(presenter != null)
-            presenter.fetchData(presenter.getOffset());
+        if (savedInstanceState == null)
+            presenter.fetchData(0);
     }
 
     @Override
