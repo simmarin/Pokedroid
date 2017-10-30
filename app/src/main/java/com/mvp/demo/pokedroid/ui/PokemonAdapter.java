@@ -1,6 +1,10 @@
 package com.mvp.demo.pokedroid.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by jatempa on 10/23/17.
@@ -65,6 +70,22 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+        }
+        @OnClick(R.id.image)
+        public void showDetails() {
+            Intent intent= new Intent(context, Details2Activity.class);
+
+            image.buildDrawingCache();
+            Bitmap imagen= image.getDrawingCache();
+
+            Bundle extras = new Bundle();
+            extras.putParcelable("imagebitmap", (Parcelable) imagen);
+            intent.putExtras(extras);
+            intent.putExtra("name",name.getText());
+            context.startActivity(intent);
         }
     }
+
+
 }
